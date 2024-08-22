@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        color: #ffffff;
+        font-family: system-ui;
+        margin-left: 20px;
+      }
+      body {
+        background-color: #222629;
+      }
+      label {
+        color: #86c232;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+      button {
+        background-color: #86c232;
+        border-color: #86c232;
+        color: #ffffff;
+        font-family: system-ui;
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 30px;
+        margin-top: 20px;
+        width: 140px;
+      }
+      input {
+        color: #222629;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: 20px;
+        width: 100px;
+      }
+    </style>
+    <script>
+      var callAPI = (length, width) => {
+        var myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        var raw = JSON.stringify({ length: length, width: width });
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow',
+        };
+        fetch('YOUR API URL', requestOptions)
+          .then((response) => response.text())
+          .then((result) => alert(JSON.parse(result).body))
+          .catch((error) => console.log('error', error));
+      };
+    </script>
+  </head>
+  <body>
+    <h1>AREA OF A RECTANGLE!</h1>
+    <form>
+      <label>Length:</label>
+      <input type="text" id="length" placeholder="테스트박스1" />
+      <label>Width:</label>
+      <input type="text" id="width" placeholder="테스트박스2" />
+      <button
+        type="button"
+        onclick="callAPI(document.getElementById('length').value,document.getElementById('width').value)"
+      >
+        CALCULATE
+      </button>
+    </form>
+  </body>
+</html>
